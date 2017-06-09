@@ -15,5 +15,6 @@ if __name__ == '__main__':
         print ("No valid words could be formed with " + rack)
 
     # Printing the words in the reverse order of their scores
-    for key in OrderedDict(sorted(words_score.items(), key=itemgetter(1), reverse=True)):
+    for key in OrderedDict(sorted(words_score.items(),
+                           key=itemgetter(1), reverse=True)):
         print (str(words_score[key]) + "\t" + key)
