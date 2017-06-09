@@ -16,5 +16,5 @@ if __name__ == '__main__':
 
     # Printing the words in the reverse order of their scores
     for word in OrderedDict(sorted(words_score.items(),
-                           key=itemgetter(1), reverse=True)):
+                            key=itemgetter(1), reverse=True)):
         print (str(words_score[word]) + "\t" + word)
