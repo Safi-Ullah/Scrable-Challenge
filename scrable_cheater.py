@@ -1,12 +1,9 @@
 import sys
 
-
 class ScrableCheater:
 
-    rack_letters_count = {}
-
     def __init__(self):
-        self.scores = {
+        self.__scores = {
                 "a": 1, "c": 3, "b": 3, "e": 1, "d": 2, "g": 2,
                 "f": 4, "i": 1, "h": 4, "k": 5, "j": 8, "m": 3,
                 "l": 1, "o": 1, "n": 1, "q": 10, "p": 3, "s": 1,
@@ -18,22 +15,22 @@ class ScrableCheater:
         words = []
         with open(file_name) as words_list:
             word = words_list.readline().split('\r')[0]
-            words.append(word)
             while word:
-                word = words_list.readline().split('\r')[0]
                 words.append(word)
+                word = words_list.readline().split('\r')[0]
         return words
 
     def init_rack_letters_count(self):
-        if self.rack_letters_count == None:
-            self.rack_letters_count = {}
+        rack_letters_count = {}
         for letter in self.rack:
-            self.rack_letters_count[letter] = 0
+            rack_letters_count[letter] = 0
+        return rack_letters_count
 
     def update_rack_letters_count(self):
-        self.init_rack_letters_count()
+        rack_letters_count = self.init_rack_letters_count()
         for letter in self.rack:
-            self.rack_letters_count[letter] += 1
+            rack_letters_count[letter] += 1
+        return rack_letters_count
 
     def retrieve_rack(self):
         if len(sys.argv) != 2:
@@ -44,22 +41,20 @@ class ScrableCheater:
             return self.rack
 
     def is_valid(self, word):
-        self.rack_letters_count = self.update_rack_letters_count()
+        rack_letters_count = self.update_rack_letters_count()
         for letter in word:
-            if letter not in self.rack_letters_count:
-                self.rack_letters_count[letter] -= 1
-            else:
+            if letter not in rack_letters_count:
                 return False
+            else:
+                rack_letters_count[letter] -= 1
 
-        for key, value in self.rack_letters_count:
-            print value
-            # if value != 0
-            #     return False
+        for key in rack_letters_count:
+            if rack_letters_count[key] < 0:
+                return False
 
         return True
 
     def find_valid_words(self, words):
-        self.rack_letters_count = self.update_rack_letters_count()
         valid_words = []
         for word in words:
             if self.is_valid(word):
@@ -70,7 +65,7 @@ class ScrableCheater:
     def calculate_score(self, word):
         word_score = 0
         for letter in word:
-            word_score += self.scores[letter]
+            word_score += self.__scores[letter.lower()]
 
         return word_score
 
