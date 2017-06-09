@@ -9,7 +9,7 @@ if __name__ == '__main__':
 
     valid_words = scrable_cheater.find_valid_words(words)
 
-    words_score = scrable_cheater.get_word_score(valid_words)
+    words_score = scrable_cheater.get_words_score(valid_words)
 
     if len(words_score) == 0:
         print ("No valid words could be formed with " + rack)

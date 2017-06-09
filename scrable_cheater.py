@@ -69,7 +69,7 @@ class ScrableCheater:
 
         return word_score
 
-    def get_word_score(self, valid_words):
+    def get_words_score(self, valid_words):
         words_score = {}
         for word in valid_words:
             words_score[word] = self.calculate_score(word)
