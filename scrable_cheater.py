@@ -51,7 +51,6 @@ class ScrableCheater:
         for key in rack_letters_count:
             if rack_letters_count[key] < 0:
                 return False
-
         return True
 
     def find_valid_words(self, words):
@@ -59,19 +58,16 @@ class ScrableCheater:
         for word in words:
             if self.is_valid(word):
                 valid_words.append(word)
-
         return valid_words
 
     def calculate_score(self, word):
         word_score = 0
         for letter in word:
             word_score += self.__scores[letter.lower()]
-
         return word_score
 
     def get_words_score(self, valid_words):
         words_score = {}
         for word in valid_words:
             words_score[word] = self.calculate_score(word)
-
         return words_score
