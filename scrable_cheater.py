@@ -14,10 +14,10 @@ class ScrableCheater:
     def retrieve_word_list(self, file_name):
         words = []
         with open(file_name) as words_list:
-            word = words_list.readline().split('\r')[0]
+            word = words_list.readline().rstrip()
             while word:
                 words.append(word)
-                word = words_list.readline().split('\r')[0]
+                word = words_list.readline().rstrip()
         return words
 
     def init_rack_letters_count(self):
